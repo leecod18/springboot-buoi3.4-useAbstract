@@ -45,7 +45,7 @@ public class DefaulProductService
         return repository.save(product);
     }
     @Override
-    protected Product SaveAndUpdate(Long id, ProductRequest request) {
+    protected Product updateAndSave(Long id, ProductRequest request) {
         Product product = repository.findById(id).orElseThrow(() -> new ResourceNotFound(id + " not found"));
 
         product.setName(request.getName());

@@ -1,7 +1,6 @@
 package com.example.demo.service;
 
 import com.example.demo.exception.ResourceNotFound;
-import org.aspectj.apache.bcel.util.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public abstract  class AbstractCrudService<Q,RP extends JpaRepository<D,I>,D,I,R>  implements BaseCrudService<Q,I,R> {
@@ -12,7 +11,7 @@ public abstract  class AbstractCrudService<Q,RP extends JpaRepository<D,I>,D,I,R
     protected final RP repository;
     protected abstract R toResponse(D domainEntity);
     protected abstract D CreateAndSave(Q request);
-    protected abstract D SaveAndUpdate(I id, Q request);
+    protected abstract D updateAndSave(I id, Q request);
 
     protected AbstractCrudService(RP repository) {
         this.repository = repository;
@@ -37,7 +36,7 @@ public abstract  class AbstractCrudService<Q,RP extends JpaRepository<D,I>,D,I,R
 
     @Override
     public R updateById(I id, Q request) {
-        D domainEntity = SaveAndUpdate(id,request);
+        D domainEntity = updateAndSave(id,request);
         return toResponse(domainEntity);
     }
 

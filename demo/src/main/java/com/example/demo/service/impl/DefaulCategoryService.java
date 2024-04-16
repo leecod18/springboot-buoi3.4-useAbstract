@@ -56,7 +56,7 @@ public class DefaulCategoryService
 
     }
     @Override
-    protected Category SaveAndUpdate(Long id, CategoryRequest request) {
+    protected Category updateAndSave(Long id, CategoryRequest request) {
         Category category = repository.findById(id).orElseThrow(() -> new ResourceNotFound(id + "Id not found"));
         category.setName(request.getName());
         Category saveCategory = repository.save(category);
